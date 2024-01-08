@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlinx-serialization'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'de.morhenn.ar_localization'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "de.morhenn.ar_localization"
+        minSdk 26
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    aaptOptions {
+        noCompress 'filamat', 'ktx'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
+    // Play services
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    //OAuth
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    // SceneView
+    implementation 'io.github.sceneview:arsceneview:0.6.1-SNAPSHOT'
+
+    implementation 'com.google.ar:core:1.35.0' //need min 1.33 for new cloud console endpoint
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+}
+
+apply plugin: 'com.google.gms.google-services'
